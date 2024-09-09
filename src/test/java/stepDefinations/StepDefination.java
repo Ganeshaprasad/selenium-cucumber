@@ -7,11 +7,13 @@ import java.util.Properties;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.*;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import org.openqa.selenium.By;
 
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -31,7 +33,7 @@ public class StepDefination extends BaseClass
         //Logging
         logger=Logger.getLogger("nopCommerceSDET");
         PropertyConfigurator.configure("Log4j.properties");
-        //logger.setLevel(Level.DEBUG);
+      //  logger.setLevel(Level.DEBUG);
 
         //Load properties file
         configProp= new Properties();
@@ -84,6 +86,9 @@ public class StepDefination extends BaseClass
     public void click_on_Login() {
         logger.info("************* click on login *****************");
         lp.clickLogin();
+        WebElement humanVerificationCheckbox = driver.findElement(By.id("recaptcha-anchor"));
+        humanVerificationCheckbox.click(); // This will work only if it's a simple checkbox
+
     }
 
     @Then("Page Title should be {string}")
